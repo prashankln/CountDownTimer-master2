@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean running;
     private boolean wasRunning;
     private static final String CURRENT_COUNTER= "counter";
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
