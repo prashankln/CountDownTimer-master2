@@ -12,34 +12,41 @@ public class MainActivity extends AppCompatActivity {
     private boolean running;
     private boolean wasRunning;
     private static final String CURRENT_COUNTER= "counter";
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(savedInstanceState != null) {
+            counter = savedInstanceState.getInt(CURRENT_COUNTER);
+        }
         countDown();
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstateState){
          super.onSaveInstanceState(savedInstateState);
+         savedInstateState.putInt(CURRENT_COUNTER,counter);
     }
     private void countDown(){
-        final TextView textView=findViewById(R.id.textView);
 
         final Handler handler=new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
 
-                    textView.setText(Integer.toString(counter));
+                final TextView textView=findViewById(R.id.textView);
+                textView.setText(Integer.toString(counter));
                     counter--;
-                    handler.postDelayed(this,1000);
+
 
                     if(counter==0){
                         counter=99;
                     }
+                    counter--;
+                handler.postDelayed(this,1000);
+
             }
         });
     }
